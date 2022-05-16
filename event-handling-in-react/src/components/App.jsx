@@ -4,9 +4,12 @@ function App() {
 
   const [Heading, setHeading] = useState("Hello");
   const [isMouseOver, setMouseOver] = useState(false);
+  const [name, setName] = useState("");
+  const [submittedName, setSubmittedName] = useState(name);
 
-  function submit() {
-    setHeading("Submitted")
+  function submit(event) {
+    setHeading("Good job!" + " " + name);
+    event.preventDefault();
   };
 
   function mouseOver() {
@@ -17,12 +20,18 @@ function App() {
     setMouseOver(false)
   };
 
+  function handleChange(event) {
+    setName(event.target.value)
+  }
+
 
   return (
     <div className="container">
       <h1>{Heading}</h1>
-      <input type="text" placeholder="What's your name?" />
-      <button onClick = {submit} onMouseOver={mouseOver} onMouseOut = {mouseOut} style={{backgroundColor: isMouseOver ? "black": "white"}}>Submit</button>
+      <form onSubmit = {submit}>
+      <input onChange={handleChange} type="text" placeholder="What's your name?" value = {name}/>
+      <button type = "submit" onMouseOver={mouseOver} onMouseOut = {mouseOut} style={{backgroundColor: isMouseOver ? "black": "white"}}>Submit</button>
+      </form>
     </div>
   );
 }
