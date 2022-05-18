@@ -5,10 +5,10 @@ function App() {
   const [Heading, setHeading] = useState("Hello");
   const [isMouseOver, setMouseOver] = useState(false);
   const [name, setName] = useState("");
-  const [submittedName, setSubmittedName] = useState(name);
 
   function submit(event) {
     setHeading("Good job!" + " " + name);
+    console.log(Heading)
     event.preventDefault();
   };
 
