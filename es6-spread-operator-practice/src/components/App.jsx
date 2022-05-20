@@ -1,23 +1,21 @@
 "use strict";
 
 import React, { useState } from "react";
+import Item from "./Item";
 
 function App() {
   const [addedItem, setAddedItem] = useState("");
   const [listArray, setListArray] = useState([]);
   // const [toDoList, setToDoList] = useState(<li>A Item</li>);
 
-  let toDoList = ""
 
   function inputChanged(event) {
     setAddedItem(event.target.value)
   }
 
   function submitItem() {
-    console.log("addedItem:"+addedItem);
     setListArray(prevArray => [...prevArray, addedItem]);
-    toDoList = listArray.map(item => <li> {item} </li>)
-    console.log("inside:" +toDoList)
+    setAddedItem("");
   }
     // console.log("insidelistArray:"+listArray)
     // let newToDoList = "";
@@ -43,8 +41,11 @@ function App() {
 // 3. newToDoList는 업데이트가 왜 한발 늦는가??? function 안의 set매쏘드는 function이 완료될때 기존 값을 업데이트 함. 
 // 4. 리액트는 array를 바로 text로 반환하는가??? 그렇슴. 리액트의 문법임. 
 
-    
-
+    function deleteItem(id) {
+      setListArray(prevArray =>  prevArray.filter(
+        (value, index) => {return index !== id}  
+      ))
+    }
 
   return (
     <div className="container">
@@ -59,10 +60,9 @@ function App() {
       </div>
       <div>
         <ul>
-          {listArray.map(item => <li> {item} </li>)}
-        </ul>
-        <ul>
-        {toDoList}
+          {listArray.map((item, index) => (
+            <Item key = {index} id = {index} text = {item}
+            delete  = {deleteItem}/>))}
         </ul>
       </div>
     </div>
