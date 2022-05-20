@@ -6,7 +6,7 @@ function CreateArea(props) {
       <form>
         <input onChange = {props.pTitleOnChange} name="title" placeholder="Title" />
         <textarea onChange = {props.pContentOnChange} name="content" placeholder="Take a note..." rows="3" />
-        <button onClick = {props.pOnClick}>Add</button>
+        <button onClick = {props.pOnClick} type = "button">Add</button>
       </form>
     </div>
   );
